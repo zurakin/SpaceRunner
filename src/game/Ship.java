@@ -5,7 +5,7 @@ public class Ship {
     private double y;
     private final double vx = 500;
     private final double vy = 500;
-    private boolean[] controlsArr = new boolean[5];
+    private final boolean[] controlsArr = new boolean[5];
     private double shootingTimeout = 0;
 
     public Ship(double x, double y) {

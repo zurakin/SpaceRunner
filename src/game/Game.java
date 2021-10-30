@@ -3,7 +3,7 @@ package game;
 import javafx.animation.AnimationTimer;
 
 public class Game {
-    private GameController controller;
+    private final GameController controller;
     private double deltaTime;
     private double pastTick = 0;
     Ship ship = new Ship(473, 546);
@@ -14,10 +14,6 @@ public class Game {
 
     public Ship getShip() {
         return ship;
-    }
-
-    public void setShip(Ship ship) {
-        this.ship = ship;
     }
 
     public void startGameThread(){
@@ -42,7 +38,7 @@ public class Game {
             deltaTime = 0;
             return;
         }
-        deltaTime = (double) ((currentTimeMillis - pastTick) / 1e9);
+        deltaTime = (currentTimeMillis - pastTick) / 1e9;
         pastTick = currentTimeMillis;
     }
 

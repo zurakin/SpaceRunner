@@ -22,7 +22,7 @@ public class InstructionsView implements View {
             Scene scene = primaryStage.getScene();
             scene.setRoot(root);
 
-            passViewToController(loader);;
+            passViewToController(loader);
 
             changeStageTitle(primaryStage);
 

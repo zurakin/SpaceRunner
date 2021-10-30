@@ -1,13 +1,12 @@
 package game;
 
 import contracts.Controller;
-import contracts.View;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 
 public class GameController extends Controller<GameView> {
-    private Game game = new Game(this);
+    private final Game game = new Game(this);
     @FXML ImageView shipImage;
 
     public ImageView getShipImage() {
