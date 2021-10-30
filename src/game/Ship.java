@@ -5,7 +5,7 @@ public class Ship {
     private double y;
     private final double vx = 500;
     private final double vy = 500;
-    private boolean[] controls = new boolean[5];
+    private boolean[] controlsArr = new boolean[5];
     private double shootingTimeout = 0;
 
     public Ship(double x, double y) {
@@ -13,13 +13,13 @@ public class Ship {
         this.y = y;
     }
 
-    public boolean[] getControls() {
-        return controls;
+    public boolean[] getControlsArray() {
+        return controlsArr;
     }
 
     public void update(double deltaTime){
         updateShootingTimeout(deltaTime);
-        if (controls[4]){
+        if (controlsArr[4]){
             shoot();
         }
         x += getDX(deltaTime);
@@ -27,12 +27,12 @@ public class Ship {
     }
 
     private double getDX(double deltaTime){
-        int dirX = ((controls[3]) ? 1 : 0) + ((controls[2]) ? -1 : 0);
+        int dirX = ((controlsArr[3]) ? 1 : 0) + ((controlsArr[2]) ? -1 : 0);
         return dirX * vx * deltaTime;
     }
 
     private double getDY(double deltaTime){
-        int dirY = ((controls[1]) ? 1 : 0) + ((controls[0]) ? -1 : 0);
+        int dirY = ((controlsArr[1]) ? 1 : 0) + ((controlsArr[0]) ? -1 : 0);
         return dirY * vy * deltaTime;
     }
 

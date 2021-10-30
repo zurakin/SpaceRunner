@@ -1,44 +1,48 @@
 package game;
 
-import javafx.animation.AnimationTimer;
+import contracts.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GameView {
-    private final Ship ship = new Ship(473, 546);
-    private double deltaTime;
-    private double pastTick = 0;
+public class GameView implements View {
     private GameController controller;
+    private ImageView shipImage;
 
     public GameView(Stage primaryStage) {
         try {
             FXMLLoader loader = getLoader();
-            Parent root = loader.load();
+            Parent rootNode = loader.load();
+            controller = loader.getController();
+            passViewToController(loader);
+            shipImage = controller.getShipImage();
 
-            setGameControls(root);
+            setGameControls(rootNode);
 
             Scene scene = primaryStage.getScene();
-            scene.setRoot(root);
+            scene.setRoot(rootNode);
 
-            passParametersToController(primaryStage, loader);
-
-            startGameThread();
+            controller.startGame();
 
             changeStageTitle(primaryStage);
 
-            root.requestFocus();
-
+            rootNode.requestFocus();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void renderShip(double x, double y){
+        shipImage.setLayoutX(x);
+        shipImage.setLayoutY(y);
+    }
+
     private void setGameControls(Parent root) {
-        GameControls gameControls = new GameControls(ship);
+        GameControls gameControls = new GameControls(controller.getGame().getShip());
         root.setOnKeyPressed(gameControls);
         root.setOnKeyReleased(gameControls);
     }
@@ -47,38 +51,13 @@ public class GameView {
         primaryStage.setTitle("SpaceRunner - Game");
     }
 
-    private void passParametersToController(Stage primaryStage, FXMLLoader loader) {
+    private void passViewToController(FXMLLoader loader) {
         controller = loader.getController();
-        controller.setPrimaryStage(primaryStage);
-        controller.setShip(ship);
+        controller.setView(this);
     }
 
     private FXMLLoader getLoader() {
         return new FXMLLoader(getClass().getResource("gameView.fxml"));
     }
 
-    public void startGameThread(){
-        AnimationTimer gameThread = new AnimationTimer()
-        {
-
-            @Override
-            public void handle( long now )
-            {
-                updateDeltaTime(now);
-                controller.render(deltaTime);
-            }
-        };
-        gameThread.start();
-    }
-
-
-    private void updateDeltaTime(long currentTimeMillis) {
-        if (pastTick == 0){
-            pastTick = currentTimeMillis;
-            deltaTime = 0;
-            return;
-        }
-        deltaTime = (double) ((currentTimeMillis - pastTick) / 1e9);
-        pastTick = currentTimeMillis;
-    }
 }

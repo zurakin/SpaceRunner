@@ -1,26 +1,21 @@
 package menu;
 
+import contracts.Controller;
 import game.GameView;
 import instructions.InstructionsView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-public class MenuController {
-    private Stage primaryStage;
-
+public class MenuController extends Controller<MenuView> {
     public void play(){
-        new GameView(primaryStage);
+        ((MenuView)getView()).toGameView();
     }
 
     public void showInstructions(){
-        new InstructionsView(primaryStage);
+        ((MenuView)getView()).toInstructionsView();
     }
 
     public void showLeaderboard(){
-        System.out.println("Leaderboard : First place: Zurakin");
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        ((MenuView)getView()).toLeaderBoardView();
     }
 }

@@ -27,7 +27,7 @@ public class Main extends Application {
         setFullScreenToggleButton(primaryStage, scene);
 
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(false);
 
         primaryStage.show();
     }

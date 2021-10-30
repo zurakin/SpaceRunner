@@ -1,6 +1,8 @@
 package menu;
 
-import application.Main;
+import contracts.View;
+import game.GameView;
+import instructions.InstructionsView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,13 +10,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MenuView {
+public class MenuView implements View {
+    Stage primaryStage;
+
     public MenuView(Stage primaryStage) {
         try {
+            this.primaryStage = primaryStage;
             FXMLLoader loader = getLoader();
             Parent root  = loader.load();
 
-            passParametersToController(primaryStage, loader);
+            passViewToController(loader);
 
             changeTitle(primaryStage);
             Scene scene = primaryStage.getScene();
@@ -30,11 +35,23 @@ public class MenuView {
         primaryStage.setTitle("SpaceRunner - main menu");
     }
 
-    private void passParametersToController(Stage primaryStage, FXMLLoader loader) {
-        ((MenuController) loader.getController()).setPrimaryStage(primaryStage);
+    private void passViewToController(FXMLLoader loader) {
+        ((MenuController) loader.getController()).setView(this);
     }
 
     private FXMLLoader getLoader() {
         return new FXMLLoader(getClass().getResource("menuView.fxml"));
+    }
+
+    public void toGameView(){
+        new GameView(primaryStage);
+    }
+
+    public void toInstructionsView(){
+        new InstructionsView(primaryStage);
+    }
+
+    public void toLeaderBoardView(){
+        System.out.println("Leaderboard : First place: Zurakin");
     }
 }

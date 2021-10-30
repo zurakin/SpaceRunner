@@ -6,13 +6,10 @@ import javafx.scene.input.KeyEvent;
 
 public class GameControls implements EventHandler<KeyEvent> {
 
-    private final Ship ship;
     private boolean[] pressedKeys;
 
     public GameControls(Ship ship){
-        this.ship = ship;
-        pressedKeys = ship.getControls();
-
+        pressedKeys = ship.getControlsArray();
     }
 
     @Override
