@@ -4,11 +4,11 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.input.KeyEvent;
 
-public class GameControls implements EventHandler<KeyEvent> {
+public class ShipControls implements EventHandler<KeyEvent> {
 
     private final boolean[] pressedKeys;
 
-    public GameControls(Ship ship){
+    public ShipControls(Ship ship){
         pressedKeys = ship.getControlsArray();
     }
 

@@ -1,22 +1,30 @@
 package game;
 
-public class Ship {
+import contracts.GameObject;
+
+import java.util.ArrayList;
+
+public class Ship implements GameObject {
     private double x;
     private double y;
     private final double vx = 500;
     private final double vy = 500;
     private final boolean[] controlsArr = new boolean[5];
     private double shootingTimeout = 0;
+    private final double shootingTimeoutValue = .2;
+    private Game game;
 
-    public Ship(double x, double y) {
+    public Ship(double x, double y, Game game) {
         this.x = x;
         this.y = y;
+        this.game = game;
     }
 
     public boolean[] getControlsArray() {
         return controlsArr;
     }
 
+    @Override
     public void update(double deltaTime){
         updateShootingTimeout(deltaTime);
         if (controlsArr[4]){
@@ -43,7 +51,9 @@ public class Ship {
     public void shoot(){
         if (shootingTimeout < 0) {
             System.out.println("pew");
-            shootingTimeout = 0.5;
+            Bullet b = new Bullet(x+21, y-40);
+            game.createBullet(b);
+            shootingTimeout = shootingTimeoutValue;
         }
     }
 
