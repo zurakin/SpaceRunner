@@ -1,6 +1,9 @@
-package game;
+package game.game;
 
 import contracts.View;
+import game.Bullet.BulletView;
+import game.GamePresenter;
+import game.Ship.ShipControls;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +12,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GameView implements View {
+    private GamePresenter presenter = new GamePresenter(this);
     private GameController controller;
+
 
     public GameView(Stage primaryStage) {
         try {
@@ -23,7 +28,7 @@ public class GameView implements View {
             Scene scene = primaryStage.getScene();
             scene.setRoot(rootNode);
 
-            controller.startGame();
+            presenter.startGame();
 
             changeStageTitle(primaryStage);
 
@@ -33,8 +38,13 @@ public class GameView implements View {
         }
     }
 
+    public void updateShipLayout(double x, double y){
+        controller.getShipPane().setLayoutX(x);
+        controller.getShipPane().setLayoutY(y);
+    }
+
     private void setGameControls(Parent root) {
-        ShipControls shipControls = new ShipControls(controller.getGame().getShip());
+        ShipControls shipControls = new ShipControls(presenter.getGame().getShip());
         root.setOnKeyPressed(shipControls);
         root.setOnKeyReleased(shipControls);
     }
@@ -46,6 +56,10 @@ public class GameView implements View {
     private void passViewToController(FXMLLoader loader) {
         controller = loader.getController();
         controller.setView(this);
+    }
+
+    public void loadBullet(BulletView bv){
+        controller.getBackground().getChildren().add(bv.getBulletImage());
     }
 
     private FXMLLoader getLoader() {

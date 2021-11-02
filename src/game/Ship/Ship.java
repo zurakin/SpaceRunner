@@ -1,8 +1,8 @@
-package game;
+package game.Ship;
 
 import contracts.GameObject;
-
-import java.util.ArrayList;
+import game.Bullet.Bullet;
+import game.game.Game;
 
 public class Ship implements GameObject {
     private double x;

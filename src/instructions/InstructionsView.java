@@ -10,7 +10,6 @@ import menu.MenuView;
 import java.io.IOException;
 
 public class InstructionsView implements View {
-
     private Stage primaryStage;
 
     public InstructionsView(Stage primaryStage) {
@@ -19,13 +18,12 @@ public class InstructionsView implements View {
             FXMLLoader loader = getLoader();
             Parent root = loader.load();
 
+            passViewToController(loader);
+
             Scene scene = primaryStage.getScene();
             scene.setRoot(root);
 
-            passViewToController(loader);
-
             changeStageTitle(primaryStage);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

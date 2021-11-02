@@ -1,7 +1,7 @@
 package menu;
 
 import contracts.View;
-import game.GameView;
+import game.game.GameView;
 import instructions.InstructionsView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MenuView implements View {
-    Stage primaryStage;
+    private Stage primaryStage;
 
     public MenuView(Stage primaryStage) {
         try {

@@ -1,4 +1,4 @@
-package game;
+package game.Bullet;
 
 import contracts.GameObject;
 

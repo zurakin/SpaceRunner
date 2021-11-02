@@ -1,19 +1,22 @@
-package game;
+package game.game;
 
+import game.Bullet.Bullet;
+import game.GamePresenter;
+import game.Ship.Ship;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
 public class Game {
-    private final GameController controller;
+    private final GamePresenter presenter;
     private double deltaTime;
     private double pastTick = 0;
     private Ship ship = new Ship(473, 546, this);
     private ArrayList<Bullet> activeBullets = new ArrayList<>();
 
 
-    public Game(GameController c){
-        controller = c;
+    public Game(GamePresenter p){
+        presenter = p;
     }
 
     public Ship getShip() {
@@ -32,8 +35,8 @@ public class Game {
                 for (Bullet b: activeBullets){
                     b.update(deltaTime);
                 }
-                controller.renderShip();
-                controller.renderBullets();
+                presenter.renderShip();
+                presenter.renderBullets();
             }
         };
         gameThread.start();
@@ -56,6 +59,6 @@ public class Game {
 
     public void createBullet(Bullet b){
         activeBullets.add(b);
-        controller.addBulletToTree(b);
+        presenter.addBulletToMap(b);
     }
 }

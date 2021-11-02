@@ -1,4 +1,4 @@
-package game;
+package game.Ship;
 
 import javafx.event.EventHandler;
 import javafx.event.EventType;

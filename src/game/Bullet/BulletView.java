@@ -1,4 +1,4 @@
-package game;
+package game.Bullet;
 
 import contracts.GameObjectView;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +22,8 @@ public class BulletView implements GameObjectView {
         }
     }
 
-    public void loadView(Pane pane){
-        pane.getChildren().add(bulletImage);
+    public Pane getBulletImage() {
+        return bulletImage;
     }
 
     @Override
