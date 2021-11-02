@@ -1,5 +1,6 @@
 package game.game;
 
+import Utils.CustomAnimationTimer;
 import game.Bullet.Bullet;
 import game.GamePresenter;
 import game.Ship.Ship;
@@ -13,6 +14,7 @@ public class Game {
     private double pastTick = 0;
     private Ship ship = new Ship(473, 546, this);
     private ArrayList<Bullet> activeBullets = new ArrayList<>();
+    private final int animationFPS = 60;
 
 
     public Game(GamePresenter p){
@@ -34,11 +36,10 @@ public class Game {
     }
 
     public void startGameThread(){
-        AnimationTimer gameThread = new AnimationTimer()
+        CustomAnimationTimer gameThread = new CustomAnimationTimer(1/animationFPS)
         {
-
             @Override
-            public void handle( long now )
+            public void customHandle( long now )
             {
                 if (now - pastTick < 16_000_000){
                     return;
