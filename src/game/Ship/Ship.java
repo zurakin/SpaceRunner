@@ -34,6 +34,7 @@ public class Ship implements GameObject {
         y += getDY(deltaTime);
     }
 
+
     private double getDX(double deltaTime){
         int dirX = ((controlsArr[3]) ? 1 : 0) + ((controlsArr[2]) ? -1 : 0);
         return dirX * vx * deltaTime;
@@ -50,7 +51,6 @@ public class Ship implements GameObject {
 
     public void shoot(){
         if (shootingTimeout < 0) {
-            System.out.println("pew");
             Bullet b = new Bullet(x+21, y-40);
             game.createBullet(b);
             shootingTimeout = shootingTimeoutValue;

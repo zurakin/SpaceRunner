@@ -6,14 +6,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import menu.MenuView;
+import menu.MenuLoader;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage){
         initializePrimaryStage(primaryStage);
-        new MenuView(primaryStage);
+        new MenuLoader(primaryStage).load();
     }
 
     private void initializePrimaryStage(Stage primaryStage) {
@@ -39,7 +39,6 @@ public class Main extends Application {
         primaryStage.setFullScreenExitHint("Press F11 to toggle full screen");
         primaryStage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE));
     }
-
 
     public static void main(String[] args) {
         launch(args);

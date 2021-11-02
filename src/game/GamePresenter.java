@@ -3,7 +3,6 @@ package game;
 import contracts.Presenter;
 import game.Bullet.Bullet;
 import game.Bullet.BulletView;
-import game.Ship.ShipView;
 import game.game.Game;
 import game.game.GameView;
 import java.util.HashMap;
@@ -11,18 +10,18 @@ import java.util.Map;
 
 
 public class GamePresenter implements Presenter<GameView> {
-    private GameView gameView;
-    private ShipView shipView;
-
+    private final GameView gameView;
     private final Game game = new Game(this);
-    private HashMap<Bullet, BulletView> bulletsMap = new HashMap();
+
+    private final HashMap<Bullet, BulletView> bulletsMap = new HashMap();
 
     public GamePresenter(GameView view) {
         this.gameView = view;
+        startGame();
     }
 
     public void renderShip(){
-        shipView.updateView(game.getShip().getX(), game.getShip().getY());
+        gameView.updateShipLayout(game.getShip().getX(), game.getShip().getY());
     }
 
     public void renderBullets(){
@@ -34,18 +33,13 @@ public class GamePresenter implements Presenter<GameView> {
     }
 
     public void startGame(){
-        game.start();
-        shipView = new ShipView(this);
+        game.startGameThread();
     }
 
     public void addBulletToMap(Bullet b){
         BulletView bv = new BulletView();
         bulletsMap.put(b, bv);
         gameView.loadBullet(bv);
-    }
-
-    public void updateShipLayout(double x, double y){
-        gameView.updateShipLayout(x, y);
     }
 
     public Game getGame() {

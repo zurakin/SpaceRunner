@@ -23,26 +23,6 @@ public class Game {
         return ship;
     }
 
-    public void startGameThread(){
-        AnimationTimer gameThread = new AnimationTimer()
-        {
-
-            @Override
-            public void handle( long now )
-            {
-                updateDeltaTime(now);
-                ship.update(deltaTime);
-                for (Bullet b: activeBullets){
-                    b.update(deltaTime);
-                }
-                presenter.renderShip();
-                presenter.renderBullets();
-            }
-        };
-        gameThread.start();
-    }
-
-
     private void updateDeltaTime(long currentTimeMillis) {
         if (pastTick == 0){
             pastTick = currentTimeMillis;
@@ -53,8 +33,26 @@ public class Game {
         pastTick = currentTimeMillis;
     }
 
-    public void start(){
-        startGameThread();
+    public void startGameThread(){
+        AnimationTimer gameThread = new AnimationTimer()
+        {
+
+            @Override
+            public void handle( long now )
+            {
+                if (now - pastTick < 16_000_000){
+                    return;
+                }
+                updateDeltaTime(now);
+                ship.update(deltaTime);
+                for (Bullet b: activeBullets){
+                    b.update(deltaTime);
+                }
+                presenter.renderShip();
+                presenter.renderBullets();
+            }
+        };
+        gameThread.start();
     }
 
     public void createBullet(Bullet b){

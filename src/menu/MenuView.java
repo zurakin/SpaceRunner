@@ -1,57 +1,26 @@
 package menu;
 
 import contracts.View;
-import game.game.GameView;
-import instructions.InstructionsView;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import instructions.InstructionsLoader;
+import game.game.GameLoader;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class MenuView implements View {
+public class MenuView  extends View {
     private Stage primaryStage;
 
-    public MenuView(Stage primaryStage) {
-        try {
-            this.primaryStage = primaryStage;
-            FXMLLoader loader = getLoader();
-            Parent root  = loader.load();
-
-            passViewToController(loader);
-
-            changeTitle(primaryStage);
-            Scene scene = primaryStage.getScene();
-            scene.setRoot(root);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void play(){
+        new GameLoader(primaryStage);
     }
 
-
-    private void changeTitle(Stage primaryStage) {
-        primaryStage.setTitle("SpaceRunner - main menu");
+    public void showInstructions(){
+        new InstructionsLoader(primaryStage);
     }
 
-    private void passViewToController(FXMLLoader loader) {
-        ((MenuController) loader.getController()).setView(this);
-    }
-
-    private FXMLLoader getLoader() {
-        return new FXMLLoader(getClass().getResource("menuView.fxml"));
-    }
-
-    public void toGameView(){
-        new GameView(primaryStage);
-    }
-
-    public void toInstructionsView(){
-        new InstructionsView(primaryStage);
-    }
-
-    public void toLeaderBoardView(){
+    public void showLeaderboard(){
         System.out.println("Leaderboard : First place: Zurakin");
+    }
+
+    public void setPrimaryStage(Stage primaryStage){
+        this.primaryStage = primaryStage;
     }
 }

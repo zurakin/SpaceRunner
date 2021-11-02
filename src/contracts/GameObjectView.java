@@ -1,5 +1,5 @@
 package contracts;
 
-public interface GameObjectView extends View{
+public interface GameObjectView{
     void updateView(double x, double y);
 }
