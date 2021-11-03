@@ -5,7 +5,7 @@ import contracts.GameObject;
 public class Bullet implements GameObject {
     private final double x;
     private double y;
-    private final double speed = -600;
+    private final double speed = -1500;
 
     public Bullet(double x, double y){
         this.x = x;

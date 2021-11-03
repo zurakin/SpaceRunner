@@ -20,6 +20,11 @@ public class GamePresenter implements Presenter<GameView> {
         startGame();
     }
 
+    public void deleteBullet(Bullet b){
+        gameView.deleteBulletView(bulletsMap.get(b));
+        bulletsMap.remove(b);
+    }
+
     public void renderShip(){
         gameView.updateShipLayout(game.getShip().getX(), game.getShip().getY());
     }

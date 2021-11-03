@@ -5,7 +5,6 @@ import game.Bullet.BulletView;
 import game.GamePresenter;
 import game.Ship.ShipControls;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 public class GameView extends View {
@@ -18,6 +17,9 @@ public class GameView extends View {
         shipPane.setLayoutY(y);
     }
 
+    public void deleteBulletView(BulletView bv){
+        background.getChildren().remove(bv.getBulletPane());
+    }
     public void setGameControls() {
         ShipControls shipControls = new ShipControls(presenter.getGame().getShip());
         background.setOnKeyPressed(shipControls);
@@ -25,6 +27,6 @@ public class GameView extends View {
     }
 
     public void loadBullet(BulletView bv){
-        background.getChildren().add(bv.getBulletImage());
+        background.getChildren().add(bv.getBulletPane());
     }
 }

@@ -11,7 +11,7 @@ public class Ship implements GameObject {
     private final double vy = 500;
     private final boolean[] controlsArr = new boolean[5];
     private double shootingTimeout = 0;
-    private final double shootingTimeoutValue = .2;
+    private final double shootingTimeoutValue = .05;
     private Game game;
 
     public Ship(double x, double y, Game game) {

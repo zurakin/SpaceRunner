@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class BulletView implements GameObjectView {
-    private Pane bulletImage;
+    private Pane bulletPane;
 
     public BulletView(){
         loadBulletImage();
@@ -15,21 +15,21 @@ public class BulletView implements GameObjectView {
 
     private void loadBulletImage(){
         try {
-            bulletImage = new FXMLLoader(getClass().getResource("bulletView.fxml")).load();
+            bulletPane = new FXMLLoader(getClass().getResource("bulletView.fxml")).load();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
         }
     }
 
-    public Pane getBulletImage() {
-        return bulletImage;
+    public Pane getBulletPane() {
+        return bulletPane;
     }
 
     @Override
     public void updateView(double x, double y) {
-        bulletImage.setLayoutX(x);
-        bulletImage.setLayoutY(y);
+        bulletPane.setLayoutX(x);
+        bulletPane.setLayoutY(y);
     }
 
 }
