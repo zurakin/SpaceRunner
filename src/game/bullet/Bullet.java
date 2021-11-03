@@ -1,11 +1,12 @@
-package game.Bullet;
+package game.bullet;
 
 import contracts.GameObject;
 
 public class Bullet implements GameObject {
     private final double x;
     private double y;
-    private final double speed = -1500;
+    public static final double speed = -1500;
+    public static double dy;
 
     public Bullet(double x, double y){
         this.x = x;
@@ -21,7 +22,7 @@ public class Bullet implements GameObject {
     }
 
     public void update(double deltaTime){
-        y += deltaTime * speed;
+        y += dy;
     }
 
 }

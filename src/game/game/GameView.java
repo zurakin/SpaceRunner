@@ -1,7 +1,7 @@
 package game.game;
 
 import contracts.View;
-import game.Bullet.BulletView;
+import game.bullet.BulletView;
 import game.GamePresenter;
 import game.Ship.ShipControls;
 import javafx.fxml.FXML;

@@ -1,8 +1,8 @@
 package game;
 
 import contracts.Presenter;
-import game.Bullet.Bullet;
-import game.Bullet.BulletView;
+import game.bullet.Bullet;
+import game.bullet.BulletView;
 import game.game.Game;
 import game.game.GameView;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class GamePresenter implements Presenter<GameView> {
         startGame();
     }
 
-    public void deleteBullet(Bullet b){
+    public void deleteBulletView(Bullet b){
         gameView.deleteBulletView(bulletsMap.get(b));
         bulletsMap.remove(b);
     }
@@ -41,7 +41,7 @@ public class GamePresenter implements Presenter<GameView> {
         game.startGameThread();
     }
 
-    public void addBulletToMap(Bullet b){
+    public void createBulletView(Bullet b){
         BulletView bv = new BulletView();
         bulletsMap.put(b, bv);
         gameView.loadBullet(bv);

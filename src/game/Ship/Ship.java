@@ -1,7 +1,7 @@
 package game.Ship;
 
 import contracts.GameObject;
-import game.Bullet.Bullet;
+import game.bullet.Bullet;
 import game.game.Game;
 
 public class Ship implements GameObject {
@@ -13,6 +13,8 @@ public class Ship implements GameObject {
     private double shootingTimeout = 0;
     private final double shootingTimeoutValue = .05;
     private Game game;
+    public static final double width = 100;
+    public static final double height = 70;
 
     public Ship(double x, double y, Game game) {
         this.x = x;
@@ -32,8 +34,23 @@ public class Ship implements GameObject {
         }
         x += getDX(deltaTime);
         y += getDY(deltaTime);
+        checkBounds();
     }
 
+    private void checkBounds(){
+        if (x < -width/2){
+            x = -width/2;
+        }
+        if (y < 0){
+            y = 0;
+        }
+        if (x + width/2 > Game.width){
+            x = Game.width-width/2;
+        }
+        if (y + height > Game.height){
+            y = Game.height-height;
+        }
+    }
 
     private double getDX(double deltaTime){
         int dirX = ((controlsArr[3]) ? 1 : 0) + ((controlsArr[2]) ? -1 : 0);
@@ -51,8 +68,8 @@ public class Ship implements GameObject {
 
     public void shoot(){
         if (shootingTimeout < 0) {
-            Bullet b = new Bullet(x+21, y-40);
-            game.createBullet(b);
+            Bullet b = new Bullet(x+21, y-30);
+            game.addBullet(b);
             shootingTimeout = shootingTimeoutValue;
         }
     }
