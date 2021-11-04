@@ -28,11 +28,11 @@ public class Game {
     }
 
     public void startGameThread() {
-        CustomAnimationTimer gameThread = new CustomAnimationTimer(1 / animationFPS) {
+        CustomAnimationTimer gameThread = new CustomAnimationTimer(1000 / animationFPS) {
             @Override
             public void customHandle(double deltaTime) {
                 ship.update(deltaTime);
-                bulletsManager.updateBullets(deltaTime);
+                bulletsManager.update(deltaTime);
 
                 presenter.renderShip();
                 presenter.renderBullets();

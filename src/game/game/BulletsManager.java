@@ -1,10 +1,11 @@
 package game.game;
 
+import contracts.GameObject;
 import game.GamePresenter;
 import game.bullet.Bullet;
 import java.util.ArrayList;
 
-public class BulletsManager {
+public class BulletsManager implements GameObject{
     private ArrayList<Bullet> activeBullets = new ArrayList<>();
     private ArrayList<Bullet> queuedBulletsForDeletion = new ArrayList<>();
     private Game game;
@@ -31,7 +32,8 @@ public class BulletsManager {
         presenter.createBulletView(b);
     }
 
-    public void updateBullets(double deltaTime){
+    @Override
+    public void update(double deltaTime){
         Bullet.dy = deltaTime * Bullet.speed;
         for (Bullet b : activeBullets) {
             b.update(deltaTime);
